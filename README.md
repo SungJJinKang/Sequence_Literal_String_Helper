@@ -1,4 +1,4 @@
-# Sequence Literal String Generator
+# Sequence_Literal_String_Helper
 
 If you wanna use string as key of key sorted container like map, unordered_map      
 You should use std::string.      

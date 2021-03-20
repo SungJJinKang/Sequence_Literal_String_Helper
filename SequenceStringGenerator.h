@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <string>
 #include <vector>
 #include <type_traits>
@@ -41,7 +42,6 @@
 /// </summary>
 
 #define DIGIT_NUM 3
-#define RESERVER_COUNT 50
 
 class SequenceStringGenerator
 {
@@ -52,23 +52,44 @@ private:
 	/// <summary>
 	/// In C++20, You can initialize std::string at compile time ( constexpr )
 	/// </summary>
-	static inline std::map<const char*, std::vector<std::string>> StringList{  };
+	static inline std::vector<std::pair<const char*, std::vector<std::string>>> StringList{  };
 
 public:
 
 	static inline const char* GetLiteralString(const char* key, size_t index)
 	{
-		auto& strList = StringList[key];
-		strList.resize(index + 1 > RESERVER_COUNT ? index + 1 : RESERVER_COUNT);
-		if (strList[index].empty() == true)
+		assert(key != "");
+
+		int strIndex = -1;
+		for (size_t i = 0; i < StringList.size() ; i++)
+		{
+			if (StringList[i].first == key)
+			{
+				strIndex = i;
+				break;
+			}
+			else if (StringList[i].first == "")
+			{
+				strIndex = i;
+				break;
+			}
+		}
+		if (strIndex == -1)
+		{
+			StringList.emplace_back();
+			strIndex = StringList.size() - 1;
+		}
+		StringList[strIndex].first = key;
+
+		if (StringList[strIndex].second[index].empty() == true)
 		{
 			char c[DIGIT_NUM + 1];
 			_itoa_s(static_cast<int>(index), c, DIGIT_NUM + 1, 10);
 
 			std::string str{ key };
 			str += c;
-			strList[index] = std::move(str);
+			StringList[strIndex].second[index] = std::move(str);
 		}
-		return strList[index].data();
+		return StringList[strIndex].second[index].data();
 	}
 };

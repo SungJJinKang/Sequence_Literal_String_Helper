@@ -16,18 +16,24 @@ int main()
 		std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
 
 		std::map<std::string, int> STD_STRING_MAP{};
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
+			char c[DIGIT_NUM + 1];
+			_itoa_s(i, c, DIGIT_NUM + 1, 10);
+
 			std::string str{ "Test String Index : " };
-			str += i;
+			str += c;
 
 			STD_STRING_MAP[str] = i;
 		}
 
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
+			char c[DIGIT_NUM + 1];
+			_itoa_s(i, c, DIGIT_NUM + 1, 10);
+
 			std::string str{ "Test String Index : " };
-			str += i;
+			str += c;
 			int a = STD_STRING_MAP[str];
 		}
 
@@ -40,17 +46,20 @@ int main()
 
 		std::map<std::string, int> STD_STRING_MAP{};
 		std::vector<std::string> KeyList{};
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
+			char c[DIGIT_NUM + 1];
+			_itoa_s(i, c, DIGIT_NUM + 1, 10);
+
 			std::string str{ "Test String Index : " };
-			str += i;
+			str += c;
 
 			STD_STRING_MAP[str] = i;
 
 			KeyList.push_back(std::move(str));
 		}
 
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			int a = STD_STRING_MAP[KeyList[i]];
 		}
@@ -64,12 +73,12 @@ int main()
 		std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
 
 		std::map<const char*, int> LITERAL_STRING_MAP{};
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			LITERAL_STRING_MAP[SequenceStringGenerator::GetLiteralString("Test String Index : ", i)] = i;
 		}
 
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			int a = LITERAL_STRING_MAP[SequenceStringGenerator::GetLiteralString("Test String Index : ", i)];
 		}

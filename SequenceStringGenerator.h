@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <type_traits>
-#include <map>
+#include <unordered_map>
 
 /// <summary>
 /// If you wanna use string as key of key sorted container like map, unordered_map,
@@ -53,7 +53,7 @@ private:
 	/// <summary>
 	/// In C++20, You can initialize std::string at compile time ( constexpr )
 	/// </summary>
-	static inline std::map<const char*, std::vector<std::string>> StringList{};
+	static inline std::unordered_map<const char*, std::vector<std::string>> StringList{};
 
 public:
 
